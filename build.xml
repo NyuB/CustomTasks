@@ -37,7 +37,7 @@
 		<jar basedir="${build.dir}" destfile="${jar.dir}/customs.jar"/>
 	</target>
 
-	<target name="gitest" depends="jar">
+	<target name="push_src" depends="jar">
 		<taskdef name="add" classname="org.kit.ant.tasks.git.GitAddTask" classpath="${jar.dir}/customs.jar"/>
 		<taskdef name="commit" classname="org.kit.ant.tasks.git.GitCommitTask" classpath="${jar.dir}/customs.jar"/>
 		<taskdef name="push" classname="org.kit.ant.tasks.git.GitPushTask" classpath="${jar.dir}/customs.jar"/>
