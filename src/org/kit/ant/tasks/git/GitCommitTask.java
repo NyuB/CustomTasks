@@ -15,8 +15,8 @@ public class GitCommitTask extends Task {
 	@Override
 	public void execute() throws BuildException {
 		try {
-			Runtime.getRuntime().exec("git commit -m \""+this.message+"\"");
-		} catch (IOException e) {
+			Runtime.getRuntime().exec("git commit -m \""+this.message+"\"").waitFor();
+		} catch (IOException | InterruptedException e) {
 			throw new BuildException();
 		}
 	}

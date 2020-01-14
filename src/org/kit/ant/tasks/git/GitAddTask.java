@@ -14,8 +14,8 @@ public class GitAddTask extends Task {
 	@Override
 	public void execute() throws BuildException {
 		try {
-			Runtime.getRuntime().exec("git add "+this.arg);
-		} catch (IOException e) {
+			Runtime.getRuntime().exec("git add "+this.arg).waitFor();
+		} catch (IOException | InterruptedException e) {
 			throw new BuildException();
 		}
 	}

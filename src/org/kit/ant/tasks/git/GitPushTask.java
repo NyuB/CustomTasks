@@ -9,8 +9,8 @@ public class GitPushTask extends Task {
 	@Override
 	public void execute() throws BuildException {
 		try {
-			Runtime.getRuntime().exec("git push");
-		} catch (IOException e) {
+			Runtime.getRuntime().exec("git push").waitFor();
+		} catch (IOException | InterruptedException e) {
 			throw new BuildException();
 		}
 	}
