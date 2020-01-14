@@ -44,6 +44,9 @@
 		<add arg="${src.dir}"/>
 		<add arg="${lib.dir}"/>
 		<add arg="${test.dir}"/>
+		<add arg="build.xml"/>
+		<commit message="Atutomated commit"/>
+		<push/>
 	</target>
 
 </project>
