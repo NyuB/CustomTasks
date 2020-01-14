@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CustomTasks" default="compile">
+
+	<property name="src.dir" value="src"/>
+	<property name="test.dir" value="test"/>
+	<property name="build.dir" value="build"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="jar.dir" value="archive"/>
+	<property name="doc.dir" value="doc"/>
+	<property name="web.dir" value="web"/>
+
+	<target name="init">
+		<mkdir dir="${src.dir}"/>
+		<mkdir dir="${lib.dir}"/>
+		<mkdir dir="${test.dir}"/>
+	</target>
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+		<delete dir="${jar.dir}"/>
+		<delete dir="${doc.dir}"/>
+	</target>
+
+	<path id="libs.cp">
+		<pathelement location="${lib.dir}\ant.jar"/>
+	</path>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${build.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${build.dir}">
+		<classpath>
+			<path refid="libs.cp"/>
+		</classpath>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar basedir="${build.dir}" destfile="${jar.dir}/customs.jar"/>
+	</target>
+
+	<target name="gitest" depends="jar">
+		<taskdef name="add" classname="org.kit.ant.tasks.git.GitAddTask" classpath="${jar.dir}/customs.jar"/>
+		<taskdef name="commit" classname="org.kit.ant.tasks.git.GitCommitTask" classpath="${jar.dir}/customs.jar"/>
+		<taskdef name="push" classname="org.kit.ant.tasks.git.GitPushTask" classpath="${jar.dir}/customs.jar"/>
+		<add arg="${src.dir}"/>
+		<add arg="${lib.dir}"/>
+		<add arg="${test.dir}"/>
+	</target>
+
+</project>
